@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Honest Salesperson - Sales Consulting and Coaching">
+    <title>The Honest Salesperson</title>
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #0f172a;    /* Slate 900 */
+            --accent-color: #2563eb;     /* Blue 600 */
+            --background-color: #f8fafc; /* Slate 50 */
+            --surface-color: #ffffff;    /* White */
+            --text-main: #334155;        /* Slate 700 */
+            --text-light: #64748b;       /* Slate 500 */
+            --border-radius: 8px;
+            --section-padding: 80px 20px;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--background-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #1d4ed8; /* Blue 700 */
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: var(--section-padding);
+        }
+
+        .surface-box {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--surface-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            background: linear-gradient(to bottom, #ffffff, var(--background-color));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .hero p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 0.875rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+            color: #ffffff;
+        }
+
+        /* Grid Layouts for Content */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Embed Containers */
+        .embed-container {
+            position: relative;
+            width: 100%;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: var(--surface-color);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 3rem 20px;
+        }
+
+        footer a {
+            color: #94a3b8;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .nav-links {
+                display: none; /* In a full build, replace with a hamburger menu */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">The Honest Salesperson</a>
+            <div class="nav-links">
+                <a href="#substack">Articles</a>
+                <a href="#linkedin">Insights</a>
+                <a href="#calendar">Book a Call</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Build a structured sales process that actually works.</h1>
+            <p>Stop overthinking, stop relying purely on referrals, and start taking systematic action to grow your business development engine.</p>
+            <a href="#calendar" class="btn">Book a Discovery Call</a>
+        </div>
+    </section>
+
+    <section id="substack">
+        <div class="container">
+            <h2>Latest from the Newsletter</h2>
+            <div class="surface-box">
+                <div class="embed-container" style="min-height: 450px;">
+                    <iframe src="https://thehonestsalesperson.substack.com/embed" width="100%" height="100%" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="linkedin" style="background-color: #ffffff;">
+        <div class="container">
+            <h2>Recent Insights</h2>
+            <div class="content-grid">
+                <div class="embed-container">
+                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
+                        <em>Paste your LinkedIn Post iframe code here.<br>
+                        (Click 'Share' on a post -> 'Embed this post')</em>
+                    </p>
+                </div>
+                
+                <div class="embed-container">
+                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
+                        <em>Paste your LinkedIn Post iframe code here.</em>
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://linkedin.com/in/YOUR_PROFILE" target="_blank" class="btn">Follow on LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="calendar">
+        <div class="container">
+            <h2>Let's Talk</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem auto;">Select a time below to schedule your discovery call. We'll discuss where you are currently stuck and map out a practical system for revenue growth.</p>
+            
+            <div class="surface-box">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/YOUR_USERNAME" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 The Honest Salesperson. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
