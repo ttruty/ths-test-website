@@ -226,13 +226,64 @@
     <section id="substack">
         <div class="container">
             <h2>Latest from the Newsletter</h2>
-            <div class="surface-box">
-                <div class="embed-container" style="min-height: 450px;">
-                    <iframe src="https://thehonestsalesperson.substack.com/embed" width="100%" height="100%" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
-                </div>
+            
+            <div class="content-grid" id="substack-feed">
+                <p style="text-align: center; width: 100%; color: var(--text-light);">Loading latest articles...</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://thehonestsalesperson.substack.com/" target="_blank" class="btn">Subscribe on Substack</a>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Your Substack RSS feed URL
+            const substackRssUrl = 'https://thehonestsalesperson.substack.com/feed';
+            // Using rss2json proxy to bypass CORS restrictions on static sites
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(substackRssUrl)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('substack-feed');
+                    container.innerHTML = ''; // Clear the "Loading" text
+                    
+                    // Grab the 3 most recent articles
+                    const latestPosts = data.items.slice(0, 3);
+
+                    latestPosts.forEach(post => {
+                        // Format the date cleanly (e.g., "May 14, 2026")
+                        const pubDate = new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        
+                        // Strip raw HTML from the Substack description to get a clean text snippet
+                        const cleanSnippet = post.description.replace(/<[^>]*>?/gm, '').substring(0, 130) + '...';
+
+                        // Build the HTML for the card
+                        const postCardHtml = `
+                            <div class="surface-box" style="display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease;">
+                                <div>
+                                    <span style="font-size: 0.875rem; color: var(--text-light); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">${pubDate}</span>
+                                    <h3 style="margin-top: 0.5rem; font-size: 1.25rem; line-height: 1.4;">
+                                        <a href="${post.link}" target="_blank" style="color: var(--primary-color); text-decoration: none;">${post.title}</a>
+                                    </h3>
+                                    <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 1.5rem;">${cleanSnippet}</p>
+                                </div>
+                                <a href="${post.link}" target="_blank" style="font-weight: 600; color: var(--accent-color); display: inline-flex; align-items: center; gap: 0.5rem;">
+                                    Read Article <span aria-hidden="true">&rarr;</span>
+                                </a>
+                            </div>
+                        `;
+                        container.innerHTML += postCardHtml;
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('substack-feed').innerHTML = '<p style="text-align: center; color: var(--text-light);">Unable to load articles right now. Please visit the Substack directly.</p>';
+                    console.error('Error fetching Substack feed:', error);
+                });
+        });
+    </script>
 
     <section id="linkedin" style="background-color: #ffffff;">
         <div class="container">
