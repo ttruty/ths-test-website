@@ -6,16 +6,17 @@
     <meta name="description" content="The Honest Salesperson - Sales Consulting and Coaching">
     <title>The Honest Salesperson</title>
     <style>
-        /* CSS Variables for consistent theming */
+        /* CSS Variables */
         :root {
-            --primary-color: #0f172a;    /* Slate 900 */
-            --accent-color: #2563eb;     /* Blue 600 */
-            --background-color: #f8fafc; /* Slate 50 */
-            --surface-color: #ffffff;    /* White */
-            --text-main: #334155;        /* Slate 700 */
-            --text-light: #64748b;       /* Slate 500 */
-            --border-radius: 8px;
-            --section-padding: 80px 20px;
+            --primary-color: #0f172a;    
+            --accent-color: #2563eb;     
+            --accent-glow: rgba(37, 99, 235, 0.3);
+            --background-color: #f8fafc; 
+            --surface-color: #ffffff;    
+            --text-main: #334155;        
+            --text-light: #64748b;       
+            --border-radius: 12px;       /* Softer, more modern corners */
+            --section-padding: 100px 20px;
         }
 
         /* Reset and Base Styles */
@@ -30,6 +31,9 @@
             line-height: 1.6;
             color: var(--text-main);
             background-color: var(--background-color);
+            /* Subtle dot pattern background */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -40,19 +44,25 @@
         }
 
         a:hover {
-            color: #1d4ed8; /* Blue 700 */
+            color: #1d4ed8; 
         }
 
         /* Typography */
         h1, h2, h3 {
             color: var(--primary-color);
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1rem;
         }
 
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         h2 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
         }
@@ -64,7 +74,7 @@
 
         /* Layout Utilities */
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
@@ -72,16 +82,25 @@
             padding: var(--section-padding);
         }
 
+        /* Elevated Surface Cards */
         .surface-box {
             background: var(--surface-color);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .surface-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         /* Navigation */
         nav {
-            background-color: var(--surface-color);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
@@ -101,59 +120,118 @@
             font-weight: 800;
             font-size: 1.25rem;
             color: var(--primary-color);
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-main);
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 120px 20px;
-            background: linear-gradient(to bottom, #ffffff, var(--background-color));
+        .nav-links a:hover {
+            color: var(--accent-color);
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            max-width: 800px;
-            margin: 0 auto 1.5rem auto;
-        }
-
-        .hero p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 2.5rem auto;
-        }
-
+        /* Buttons */
         .btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: #ffffff;
-            padding: 0.875rem 2rem;
-            border-radius: var(--border-radius);
+            padding: 1rem 2.5rem;
+            border-radius: 50px; /* Pill shape for modern look */
             font-weight: 600;
             font-size: 1.125rem;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 14px 0 var(--accent-glow);
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
             background-color: #1d4ed8;
             color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Split Hero Section */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: var(--text-light);
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         /* Grid Layouts for Content */
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Calendar Section Split Layout */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+
+        .calendar-info {
+            padding: 3rem;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .calendar-info h3 {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .calendar-info p {
+            color: #94a3b8;
+        }
+
+        .calendar-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 2rem;
+            opacity: 0.9;
         }
 
         /* Embed Containers */
@@ -162,21 +240,12 @@
             width: 100%;
             border-radius: var(--border-radius);
             overflow: hidden;
-            background: var(--surface-color);
+            background: var(--background-color);
             min-height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #e2e8f0;
-        }
-
-        .embed-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            position: absolute;
-            top: 0;
-            left: 0;
+            border: 1px dashed #cbd5e1;
         }
 
         /* Footer */
@@ -184,20 +253,24 @@
             background-color: var(--primary-color);
             color: #ffffff;
             text-align: center;
-            padding: 3rem 20px;
+            padding: 4rem 20px;
+            margin-top: 4rem;
         }
 
-        footer a {
-            color: #94a3b8;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-grid, .calendar-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.75rem;
+            }
+            .hero-image {
+                height: 350px;
             }
             .nav-links {
-                display: none; /* In a full build, replace with a hamburger menu */
+                display: none;
             }
         }
     </style>
@@ -210,63 +283,104 @@
             <div class="nav-links">
                 <a href="#substack">Articles</a>
                 <a href="#linkedin">Insights</a>
-                <a href="#calendar">Book a Call</a>
+                <a href="#calendar" class="btn" style="padding: 0.6rem 1.5rem; font-size: 1rem;">Book a Call</a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="container">
-            <h1>Build a structured sales process that actually works.</h1>
-            <p>Stop overthinking, stop relying purely on referrals, and start taking systematic action to grow your business development engine.</p>
-            <a href="#calendar" class="btn">Book a Discovery Call</a>
+        <div class="container hero-grid">
+            <div>
+                <h1>Build a structured <span class="gradient-text">sales process</span> that actually works.</h1>
+                <p>Stop overthinking, stop relying purely on referrals, and start taking systematic action to grow your business development engine.</p>
+                <a href="#calendar" class="btn">Book a Discovery Call</a>
+            </div>
+            <div>
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Team strategy session" class="hero-image">
+            </div>
         </div>
     </section>
 
-    <section id="substack">
+    <section id="substack" style="background-color: var(--surface-color); padding: 80px 20px;">
         <div class="container">
             <h2>Latest from the Newsletter</h2>
-            
             <div class="content-grid" id="substack-feed">
                 <p style="text-align: center; width: 100%; color: var(--text-light);">Loading latest articles...</p>
             </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://thehonestsalesperson.substack.com/" target="_blank" class="btn">Subscribe on Substack</a>
+            <div style="text-align: center; margin-top: 3.5rem;">
+                <a href="https://thehonestsalesperson.substack.com/" target="_blank" class="btn">Read More on Substack</a>
             </div>
         </div>
     </section>
 
+    <section id="linkedin">
+        <div class="container">
+            <h2>Recent Insights</h2>
+            <div class="content-grid">
+                <div class="embed-container">
+                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
+                                                <em><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7470103106286944256?collapsed=1" height="670" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe></em>
+
+                    </p>
+                </div>
+                <div class="embed-container">
+                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
+                        <em><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7470170197916590080?collapsed=1" height="264" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe></em>
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3.5rem;">
+                <a href="https://linkedin.com/in/KeelyFlood" target="_blank" class="btn">Follow on LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="calendar" style="background-color: var(--surface-color);">
+        <div class="container">
+            <div class="calendar-grid">
+                <div class="calendar-info">
+                    <h3>Ready to scale?</h3>
+                    <p>Select a time to schedule your discovery call. We'll discuss where you are currently stuck and map out a practical system for revenue growth.</p>
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="Business agreement" class="calendar-image">
+                </div>
+                <div style="padding: 2rem;">
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/buttonmasherbrew" style="min-width:320px;height:650px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 1rem;">The Honest Salesperson</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem;">&copy; 2026 The Honest Salesperson. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Your Substack RSS feed URL
             const substackRssUrl = 'https://thehonestsalesperson.substack.com/feed';
-            // Using rss2json proxy to bypass CORS restrictions on static sites
             const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(substackRssUrl)}`;
 
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     const container = document.getElementById('substack-feed');
-                    container.innerHTML = ''; // Clear the "Loading" text
+                    container.innerHTML = ''; 
                     
-                    // Grab the 3 most recent articles
                     const latestPosts = data.items.slice(0, 3);
 
                     latestPosts.forEach(post => {
-                        // Format the date cleanly (e.g., "May 14, 2026")
                         const pubDate = new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                        
-                        // Strip raw HTML from the Substack description to get a clean text snippet
                         const cleanSnippet = post.description.replace(/<[^>]*>?/gm, '').substring(0, 130) + '...';
 
-                        // Build the HTML for the card
                         const postCardHtml = `
-                            <div class="surface-box" style="display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease;">
+                            <div class="surface-box" style="display: flex; flex-direction: column; justify-content: space-between;">
                                 <div>
-                                    <span style="font-size: 0.875rem; color: var(--text-light); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">${pubDate}</span>
-                                    <h3 style="margin-top: 0.5rem; font-size: 1.25rem; line-height: 1.4;">
-                                        <a href="${post.link}" target="_blank" style="color: var(--primary-color); text-decoration: none;">${post.title}</a>
+                                    <span style="font-size: 0.85rem; color: var(--accent-color); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">${pubDate}</span>
+                                    <h3 style="margin-top: 0.75rem; font-size: 1.3rem; line-height: 1.4;">
+                                        <a href="${post.link}" target="_blank" style="color: var(--primary-color);">${post.title}</a>
                                     </h3>
                                     <p style="font-size: 1rem; color: var(--text-main); margin-bottom: 1.5rem;">${cleanSnippet}</p>
                                 </div>
@@ -280,50 +394,8 @@
                 })
                 .catch(error => {
                     document.getElementById('substack-feed').innerHTML = '<p style="text-align: center; color: var(--text-light);">Unable to load articles right now. Please visit the Substack directly.</p>';
-                    console.error('Error fetching Substack feed:', error);
                 });
         });
     </script>
-
-    <section id="linkedin" style="background-color: #ffffff;">
-        <div class="container">
-            <h2>Recent Insights</h2>
-            <div class="content-grid">
-                <div class="embed-container">
-                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
-                        <em><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7470103106286944256?collapsed=1" height="670" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe></em>
-                    </p>
-                </div>
-                
-                <div class="embed-container">
-                    <p style="color: var(--text-light); text-align: center; padding: 1rem;">
-                        <em><iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7470170197916590080?collapsed=1" height="264" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe></em>
-                    </p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="https://linkedin.com/in/KeelyFlood" target="_blank" class="btn">Follow on LinkedIn</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="calendar">
-        <div class="container">
-            <h2>Let's Talk</h2>
-            <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem auto;">Select a time below to schedule your discovery call. We'll discuss where you are currently stuck and map out a practical system for revenue growth.</p>
-            
-            <div class="surface-box">
-                <div class="calendly-inline-widget" data-url="https://calendly.com/buttonmasherbrew" style="min-width:320px;height:700px;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 The Honest Salesperson. All rights reserved.</p>
-        </div>
-    </footer>
-
 </body>
 </html>
