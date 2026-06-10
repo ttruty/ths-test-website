@@ -388,7 +388,68 @@
             </div>
         </div>
     </section>
-  
+
+    <section style="background: var(--primary-color); color: white; padding: 80px 20px;">
+        <div class="container" style="max-width: 600px; text-align: center;">
+            <h2 style="color: white; margin-bottom: 1rem;">What's your actual potential?</h2>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">Adjust the sliders to see what a systematic sales process could do for your desk.</p>
+            
+            <div style="background: white; padding: 2rem; border-radius: 12px; color: var(--primary-color); text-align: left;">
+                <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Average Fee / Deal Size: <span id="fee-val" style="color: var(--accent-color);">$15,000</span></label>
+                <input type="range" id="fee-slider" min="5000" max="50000" step="1000" value="15000" style="width: 100%; margin-bottom: 2rem;">
+
+                <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Current Deals Closed per Year: <span id="deals-val" style="color: var(--accent-color);">10</span></label>
+                <input type="range" id="deals-slider" min="1" max="50" step="1" value="10" style="width: 100%; margin-bottom: 2rem;">
+
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 1.5rem; text-align: center;">
+                    <p style="font-size: 1rem; color: var(--text-light); margin-bottom: 0.5rem;">If coaching helps you close just 30% more deals, you'd add:</p>
+                    <h3 id="result" style="font-size: 2.5rem; color: #10b981; margin: 0;">+$45,000</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const feeSlider = document.getElementById('fee-slider');
+        const dealsSlider = document.getElementById('deals-slider');
+        const feeVal = document.getElementById('fee-val');
+        const dealsVal = document.getElementById('deals-val');
+        const result = document.getElementById('result');
+
+        function updateCalc() {
+            const fee = parseInt(feeSlider.value);
+            const deals = parseInt(dealsSlider.value);
+            
+            feeVal.textContent = '$' + fee.toLocaleString();
+            dealsVal.textContent = deals;
+            
+            // Assume coaching increases deal volume by 30%
+            const additionalDeals = deals * 0.30;
+            const extraRevenue = additionalDeals * fee;
+            
+            result.textContent = '+$' + extraRevenue.toLocaleString(undefined, {maximumFractionDigits: 0});
+        }
+
+        feeSlider.addEventListener('input', updateCalc);
+        dealsSlider.addEventListener('input', updateCalc);
+    </script>
+
+    <section id="calendar" style="background-color: var(--surface-color);">
+        <div class="container">
+            <div class="calendar-grid">
+                <div class="calendar-info">
+                    <h3>Ready to scale?</h3>
+                    <p>Select a time to schedule your discovery call. We'll discuss where you are currently stuck and map out a practical system for revenue growth.</p>
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="Business agreement" class="calendar-image">
+                </div>
+                <div style="padding: 2rem;">
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/buttonmasherbrew" style="min-width:320px;height:650px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="reviews" style="overflow: hidden; padding: 60px 0;">
         <div class="container">
             <h2>Client Success</h2>
@@ -484,67 +545,6 @@
                         <h4 style="color: var(--primary-color); margin: 0;">Melanie Wilk</h4>
                         <span style="font-size: 0.9rem; color: var(--text-light);">Founder & CEO, Thrive Recruitment Inc.</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section style="background: var(--primary-color); color: white; padding: 80px 20px;">
-        <div class="container" style="max-width: 600px; text-align: center;">
-            <h2 style="color: white; margin-bottom: 1rem;">What's your actual potential?</h2>
-            <p style="color: #94a3b8; margin-bottom: 2rem;">Adjust the sliders to see what a systematic sales process could do for your desk.</p>
-            
-            <div style="background: white; padding: 2rem; border-radius: 12px; color: var(--primary-color); text-align: left;">
-                <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Average Fee / Deal Size: <span id="fee-val" style="color: var(--accent-color);">$15,000</span></label>
-                <input type="range" id="fee-slider" min="5000" max="50000" step="1000" value="15000" style="width: 100%; margin-bottom: 2rem;">
-
-                <label style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Current Deals Closed per Year: <span id="deals-val" style="color: var(--accent-color);">10</span></label>
-                <input type="range" id="deals-slider" min="1" max="50" step="1" value="10" style="width: 100%; margin-bottom: 2rem;">
-
-                <div style="border-top: 1px solid #e2e8f0; padding-top: 1.5rem; text-align: center;">
-                    <p style="font-size: 1rem; color: var(--text-light); margin-bottom: 0.5rem;">If coaching helps you close just 30% more deals, you'd add:</p>
-                    <h3 id="result" style="font-size: 2.5rem; color: #10b981; margin: 0;">+$45,000</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        const feeSlider = document.getElementById('fee-slider');
-        const dealsSlider = document.getElementById('deals-slider');
-        const feeVal = document.getElementById('fee-val');
-        const dealsVal = document.getElementById('deals-val');
-        const result = document.getElementById('result');
-
-        function updateCalc() {
-            const fee = parseInt(feeSlider.value);
-            const deals = parseInt(dealsSlider.value);
-            
-            feeVal.textContent = '$' + fee.toLocaleString();
-            dealsVal.textContent = deals;
-            
-            // Assume coaching increases deal volume by 30%
-            const additionalDeals = deals * 0.30;
-            const extraRevenue = additionalDeals * fee;
-            
-            result.textContent = '+$' + extraRevenue.toLocaleString(undefined, {maximumFractionDigits: 0});
-        }
-
-        feeSlider.addEventListener('input', updateCalc);
-        dealsSlider.addEventListener('input', updateCalc);
-    </script>
-
-    <section id="calendar" style="background-color: var(--surface-color);">
-        <div class="container">
-            <div class="calendar-grid">
-                <div class="calendar-info">
-                    <h3>Ready to scale?</h3>
-                    <p>Select a time to schedule your discovery call. We'll discuss where you are currently stuck and map out a practical system for revenue growth.</p>
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80" alt="Business agreement" class="calendar-image">
-                </div>
-                <div style="padding: 2rem;">
-                    <div class="calendly-inline-widget" data-url="https://calendly.com/buttonmasherbrew" style="min-width:320px;height:650px;"></div>
-                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                 </div>
             </div>
         </div>
