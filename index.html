@@ -459,6 +459,129 @@
     dealsSlider.addEventListener('change', fireConfetti);
 </script>
 
+    <section style="background-color: var(--background-color); padding: 80px 20px;">
+        <div class="container" style="max-width: 700px; text-align: center;">
+            <h2 style="margin-bottom: 1rem;">Is your pipeline a ticking time bomb?</h2>
+            <p style="color: var(--text-light); margin-bottom: 3rem;">Answer 3 quick questions to check your Feast or Famine risk score.</p>
+            
+            <div class="surface-box" style="text-align: left;" id="quiz-container">
+                
+                <div class="quiz-step" id="step-1">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">1. Where does your new business come from right now?</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="quiz-btn" onclick="nextStep(2, 30)">Almost entirely referrals & inbound</button>
+                        <button class="quiz-btn" onclick="nextStep(2, 15)">A mix of referrals and some outbound</button>
+                        <button class="quiz-btn" onclick="nextStep(2, 0)">Systematic, daily outbound generation</button>
+                    </div>
+                </div>
+
+                <div class="quiz-step" id="step-2" style="display: none;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">2. What happens to your business development when you sign a big client?</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="quiz-btn" onclick="nextStep(3, 40)">BD stops completely while I fulfill the search</button>
+                        <button class="quiz-btn" onclick="nextStep(3, 20)">It slows down, but I still do a little</button>
+                        <button class="quiz-btn" onclick="nextStep(3, 0)">My outbound engine runs regardless of workload</button>
+                    </div>
+                </div>
+
+                <div class="quiz-step" id="step-3" style="display: none;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">3. Do you have a clear, targeted Ideal Customer Profile (ICP)?</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="quiz-btn" onclick="showResults(30)">No, I take whoever will sign a contract</button>
+                        <button class="quiz-btn" onclick="showResults(15)">Vaguely, but I struggle to articulate it</button>
+                        <button class="quiz-btn" onclick="showResults(0)">Yes, heavily niched and highly targeted</button>
+                    </div>
+                </div>
+
+                <div class="quiz-step" id="quiz-results" style="display: none; text-align: center;">
+                    <p style="font-size: 1rem; color: var(--text-light); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Your Volatility Score</p>
+                    <h3 id="score-display" style="font-size: 4rem; color: #ef4444; margin-bottom: 1rem; line-height: 1;">85%</h3>
+                    <h4 id="score-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Extreme Famine Risk</h4>
+                    <p id="score-desc" style="color: var(--text-main); margin-bottom: 2rem;">You are relying entirely on hope and referrals. When your current reqs dry up, you will have no pipeline to fall back on. You need a system.</p>
+                    <a href="#calendar" class="btn" style="width: 100%;">Fix Your System Now</a>
+                    <p style="margin-top: 1rem;"><a href="#" onclick="resetQuiz(event)" style="font-size: 0.9rem; color: var(--text-light); text-decoration: underline;">Retake Assessment</a></p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .quiz-btn {
+            background-color: var(--background-color);
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .quiz-btn:hover {
+            border-color: var(--accent-color);
+            background-color: #eff6ff;
+            transform: translateX(5px);
+        }
+    </style>
+
+    <script>
+        let totalScore = 0;
+
+        function nextStep(stepNumber, points) {
+            totalScore += points;
+            
+            // Hide all steps
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            
+            // Show next step
+            document.getElementById('step-' + stepNumber).style.display = 'block';
+        }
+
+        function showResults(points) {
+            totalScore += points;
+            
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            
+            const resultsDiv = document.getElementById('quiz-results');
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreTitle = document.getElementById('score-title');
+            const scoreDesc = document.getElementById('score-desc');
+            
+            scoreDisplay.textContent = totalScore + '%';
+            
+            if (totalScore >= 70) {
+                scoreDisplay.style.color = '#ef4444'; // Red
+                scoreTitle.textContent = "Extreme Famine Risk";
+                scoreDesc.textContent = "You are relying entirely on hope and referrals. When your current reqs dry up, you will have a massive gap in revenue. You need an outbound system immediately.";
+            } else if (totalScore >= 35) {
+                scoreDisplay.style.color = '#f59e0b'; // Yellow/Orange
+                scoreTitle.textContent = "Moderate Volatility";
+                scoreDesc.textContent = "You have some momentum, but your lack of consistency means you are leaving significant money on the table. It's time to build a repeatable framework.";
+            } else {
+                scoreDisplay.style.color = '#10b981'; // Green
+                scoreTitle.textContent = "Systematic & Stable";
+                scoreDesc.textContent = "You have a solid foundation! A discovery call can help you optimize your current engine to scale from 6-figures to 7-figures.";
+            }
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        function resetQuiz(e) {
+            e.preventDefault();
+            totalScore = 0;
+            document.querySelectorAll('.quiz-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            document.getElementById('step-1').style.display = 'block';
+        }
+    </script>
+
     <section id="calendar" style="background-color: var(--surface-color);">
         <div class="container">
             <div class="calendar-grid">
