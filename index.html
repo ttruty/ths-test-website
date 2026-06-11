@@ -409,30 +409,55 @@
         </div>
     </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        const feeSlider = document.getElementById('fee-slider');
-        const dealsSlider = document.getElementById('deals-slider');
-        const feeVal = document.getElementById('fee-val');
-        const dealsVal = document.getElementById('deals-val');
-        const result = document.getElementById('result');
+    const feeSlider = document.getElementById('fee-slider');
+    const dealsSlider = document.getElementById('deals-slider');
+    const feeVal = document.getElementById('fee-val');
+    const dealsVal = document.getElementById('deals-val');
+    const result = document.getElementById('result');
 
-        function updateCalc() {
-            const fee = parseInt(feeSlider.value);
-            const deals = parseInt(dealsSlider.value);
-            
-            feeVal.textContent = '$' + fee.toLocaleString();
-            dealsVal.textContent = deals;
-            
-            // Assume coaching increases deal volume by 30%
-            const additionalDeals = deals * 0.30;
-            const extraRevenue = additionalDeals * fee;
-            
-            result.textContent = '+$' + extraRevenue.toLocaleString(undefined, {maximumFractionDigits: 0});
-        }
+    // 1. Update the numbers in real-time
+    function updateCalc() {
+        const fee = parseInt(feeSlider.value);
+        const deals = parseInt(dealsSlider.value);
+        
+        feeVal.textContent = '$' + fee.toLocaleString();
+        dealsVal.textContent = deals;
+        
+        // Assume coaching increases deal volume by 30%
+        const additionalDeals = deals * 0.30;
+        const extraRevenue = additionalDeals * fee;
+        
+        result.textContent = '+$' + extraRevenue.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
 
-        feeSlider.addEventListener('input', updateCalc);
-        dealsSlider.addEventListener('input', updateCalc);
-    </script>
+    // 2. Fire the confetti from the result text
+    function fireConfetti() {
+        // Get the exact X/Y coordinates of the total amount text
+        const rect = result.getBoundingClientRect();
+        const originX = (rect.left + (rect.width / 2)) / window.innerWidth;
+        const originY = (rect.top + (rect.height / 2)) / window.innerHeight;
+
+        // Launch the firework!
+        confetti({
+            particleCount: 60,
+            spread: 70,
+            origin: { x: originX, y: originY },
+            colors: ['#10b981', '#34d399', '#ffffff'], // Matches the green text
+            disableForReducedMotion: true, // Accessibility best-practice
+            zIndex: 1000
+        });
+    }
+
+    // Update numbers instantly while dragging
+    feeSlider.addEventListener('input', updateCalc);
+    dealsSlider.addEventListener('input', updateCalc);
+
+    // Only fire confetti when the user lets go of the slider
+    feeSlider.addEventListener('change', fireConfetti);
+    dealsSlider.addEventListener('change', fireConfetti);
+</script>
 
     <section id="calendar" style="background-color: var(--surface-color);">
         <div class="container">
