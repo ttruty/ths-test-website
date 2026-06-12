@@ -860,3 +860,262 @@ footer h2 {
 .inquiry-embed {
     padding: 0;
 }
+
+/* --- First-Time Visitor Popup Styles --- */
+/* --- Modern Shadcn/Tailwind Dialogue Styles --- */
+.dialogue-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    /* Exactly matches Tailwind's bg-black/80 */
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.dialogue-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dialogue-content {
+    background-color: var(--surface-color, #ffffff);
+    /* Tailwind border & border-radius */
+    border: 1px solid #e2e8f0; 
+    border-radius: 0.5rem; 
+    /* Tailwind shadow-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    /* Tailwind max-w-lg (512px) */
+    max-width: 32rem; 
+    /* Tailwind p-6 (24px) */
+    padding: 1.5rem; 
+    position: relative;
+    display: grid;
+    /* Tailwind gap-4 */
+    gap: 1rem; 
+    transform: scale(0.95);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialogue-overlay.show .dialogue-content {
+    transform: scale(1);
+}
+
+.dialogue-header {
+    display: flex;
+    flex-direction: column;
+    /* Tailwind space-y-1.5 */
+    gap: 0.375rem; 
+    text-align: center;
+}
+
+@media (min-width: 640px) {
+    .dialogue-header {
+        text-align: left;
+    }
+}
+
+.dialogue-title {
+    /* Tailwind text-lg font-semibold leading-none tracking-tight */
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--primary-color, #0f172a);
+}
+
+.dialogue-description {
+    /* Tailwind text-sm text-muted-foreground */
+    font-size: 0.875rem;
+    color: var(--text-light, #64748b);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.dialogue-close-x {
+    /* Tailwind absolute right-4 top-4 */
+    position: absolute;
+    right: 1rem; 
+    top: 1rem; 
+    border-radius: 0.125rem;
+    opacity: 0.7;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.dialogue-close-x:hover {
+    opacity: 1;
+}
+
+.dialogue-close-x svg {
+    /* Tailwind size-4 */
+    width: 1rem;
+    height: 1rem;
+}
+
+/* --- Dialogue Footer & Buttons --- */
+/* --- Modern Shadcn/Tailwind Dialogue Styles --- */
+.dialogue-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.dialogue-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* UPDATED: Removed padding and added overflow hidden for the split layout */
+.dialogue-content.split-layout {
+    background-color: transparent;
+    border: none; 
+    border-radius: 0.75rem; /* Slightly softer corners for a large card */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1); 
+    width: 95%;
+    max-width: 480px; 
+    padding: 0; /* Important: Padding moved to the inner divs */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensures the top color respects the rounded corners */
+    transform: scale(0.95);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dialogue-overlay.show .dialogue-content {
+    transform: scale(1);
+}
+
+/* NEW: Top Colored Section */
+.dialogue-top {
+    background-color: var(--primary-color);
+    padding: 2.5rem 2rem 2rem 2rem;
+}
+
+/* NEW: Bottom White Section */
+.dialogue-bottom {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.5);
+}
+
+.dialogue-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+    text-align: center;
+}
+
+.dialogue-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0;
+}
+
+.dialogue-description {
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* NEW: Checklist Styles */
+.dialogue-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dialogue-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.check-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    color: #10b981; /* Emerald green checkmarks */
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.dialogue-close-x {
+    position: absolute;
+    right: 1.25rem; 
+    top: 1.25rem; 
+    border-radius: 0.125rem;
+    opacity: 0.6;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dialogue-close-x:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Primary Button Updates for Colored Background */
+#dialogue-cta.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem; 
+    font-size: 0.95rem; 
+    font-weight: 600; 
+    height: 2.75rem; 
+    padding: 0 1rem; 
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+#dialogue-cta.btn:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+}
+
+#dialogue-dismiss.btn-ghost {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#dialogue-dismiss.btn-ghost:hover {
+    color: var(--primary-color) !important;
+}
